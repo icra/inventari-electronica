@@ -53,8 +53,8 @@
     .h2{
       font-weight:bold;
       font-size:1.5em;
-      margin-bottom:0.83em;
-      margin-top:0.83em;
+      margin-bottom:1px;
+      margin-top:1px;
       background:#eee;
     }
   </style>
@@ -69,10 +69,11 @@
 
 <div id=app>
   <h1>ICRA - Inventari Electrònica</h1>
+  <p>Registre de cables, adaptadors, plaques i altres peces disponibles a ICRA</p>
+
+  <!--inventari-->
   <details open>
-    <summary class=h2>
-      Cables, adaptadors, plaques i altres peces disponibles a ICRA
-    </summary>
+    <summary class=h2>Inventari</summary>
     <div style="margin-left:0.83em">
       <details open v-for="cat,nom_cat in inventari">
         <summary><b>{{nom_cat}}</b></summary>
@@ -86,10 +87,9 @@
     </div>
   </details>
 
-  <details open>
-    <summary class=h2>
-      Nomenclatura cables/connectors típics
-    </summary>
+  <!--nomenclatura-->
+  <details>
+    <summary class=h2>Nomenclatura cables/connectors típics</summary>
     <div
       style="
         display:flex;
