@@ -1,0 +1,103 @@
+<!doctype><html><head><meta charset=utf8>
+  <title>inventari electrònica</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    let inventari={
+      "Cables alimentació":{
+        "Transformador endoll 220V-AC - USB micro mascle (5V)": 1,
+        "Cable 220V-AC - IEC-320-C5 femella (tipus 'mickey mouse')":1,
+      },
+      "Cables dades":{
+        "Cable DB9 femella - femella (1)": 1,
+      },
+      "Adaptadors":{
+        "Adaptador DB9 (femella) - pins (TR+, TR-, RXD+, RXD-, GND)":1,
+        "Adaptador mini displayport (mascle) - DVI-d (femella)": 1,
+        "Cable USB mini (mascle) - USB tipus A (mascle)":1,
+        "Cable USB tipus A (mascle - femella) 1 metre":4,
+        "Cable USB tipus A (mascle) - DB9 (mascle) (RS422/485) (marca DTech)": 1,
+        "Cable micro USB C (mascle) - (mascle)":1,
+      },
+      "Arduino (microcontrolador programable)":{
+        "Arduino UNO (USB tipus B)":1,
+        "Arduino YUN (USB tipus A) (+wifi)":1,
+        "Arduino UNO (USB micro) (marca Seeeduino)":1,
+      },
+      "Raspberry Pi (mini ordinador Linux)":{
+        "Raspberry Pi (model B)":3,
+        "Shield RS485 (marca linksprite)":1,
+      },
+    };
+  </script>
+  <style>
+    summary{
+      cursor:pointer;
+    }
+    summary:hover{
+      text-decoration:underline;
+    }
+    img{
+      display:block;
+      max-width:20%;
+      max-height:250px;
+      box-shadow:1px 1px 0px #ccc;
+      margin-right:1px;
+    }
+    .h2{
+      font-weight:bold;
+      font-size:1.5em;
+      margin-bottom:0.83em;
+      margin-top:0.83em;
+      background:#eee;
+    }
+  </style>
+</head><body>
+
+<!--TBD TODO-->
+<b style="background:yellow">Aquesta pàgina és un draft per fer proposta (abril 2024). Responsable: lbosch</b>
+
+<div id=app>
+  <h1>ICRA - Inventari Electrònica</h1>
+  <details open>
+    <summary class=h2>
+      Cables, adaptadors, plaques i altres peces
+    </summary>
+    <div style="margin-left:0.83em">
+      <details open v-for="cat,nom_cat in inventari">
+        <summary><b>{{nom_cat}}</b></summary>
+        <ul>
+          <li v-for="quantitat,peça in cat">
+            <b style="color:blue">[{{quantitat}}x]</b> &mdash;
+            {{peça}}
+          </li>
+        </ul>
+      </details>
+    </div>
+  </details>
+
+  <details open>
+    <summary class=h2>
+      Nomenclatura cables/connectors típics
+    </summary>
+    <div
+      style="
+        display:flex;
+      "
+    >
+      <img src="img/usb.jpg">
+      <img src="img/iec-320.webp">
+      <img src="img/db9.webp">
+      <img src="img/screen.webp">
+    </div>
+  </details>
+</div>
+
+<script>
+  let app = Vue.createApp({
+    data(){return{
+      inventari,
+    }},
+    methods:{},
+  }).mount("#app");
+</script>
+
