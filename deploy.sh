@@ -10,5 +10,5 @@ git push
 # -P  mostra progrés
 # -vv incrementa verbositat
 # -r  actua recursivament
-#rsync -hPvr \
-#  . root@icra.loading.net:/var/www/vhosts/icradev.cat/inventari-electronica.icradev.cat
+rsync -hPvr \
+  . root@icra.loading.net:/var/www/vhosts/icradev.cat/inventari-electronica.icradev.cat
