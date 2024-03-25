@@ -94,13 +94,14 @@
   <div>
     <input v-model="query" placeholder="Buscar peça">
     <button @click="query=''">X</button>
-    <span v-if="resultats_cerca.length">
+    <span>
       ({{resultats_cerca.length}} resultats)
     </span>
-    <hr>
   </div>
 
+  <!--resultats cerca-->
   <div v-if="query!=''">
+    <span v-if="resultats_cerca.length==0">~No hi ha resultats</span>
     <ul>
       <li v-for="peça in resultats_cerca">
         <b style="color:blue">[{{peça.val}}x]</b> &mdash;
@@ -110,7 +111,7 @@
   </div>
 
   <!--inventari-->
-  <details open v-if="query==''">
+  <details open v-if="query==''" style="margin-top:10px">
     <summary class=h2>Inventari</summary>
     <div style="margin-left:0.83em">
       <details open v-for="cat,nom_cat in inventari">
@@ -153,11 +154,11 @@
     computed:{
       resultats_cerca(){
         let peces=[];//return value
-        let query = this.query.toUpperCase();
+        let query = this.query.toUpperCase().split(" ");
         Object.values(inventari).forEach(obj=>{
           Object.entries(obj).forEach(([key,val])=>{
             let text = key.toUpperCase();
-            if(text.includes(query)){
+            if(query.every(token=>text.includes(token))){
               peces.push({key,val});
             }
           });
