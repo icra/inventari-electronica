@@ -77,17 +77,40 @@
   <hr>
   La idea és que abans de comprar components nous mirem si ja tenim peces
   d'anteriors projectes.
+  <hr>
 </div>
 
 <div id=app>
+  <code>
+    <a href="//github.com/icra/inventari-electronica">github.com/icra/inventari-electronica</a>
+  </code>
   <h1>ICRA - Inventari Electrònica</h1>
   <p>
     Registre de cables, adaptadors, plaques i altres peces disponibles pels
     investigadors d'ICRA.
   </p>
 
+  <!--query-->
+  <div>
+    <input v-model="query" placeholder="Buscar peça">
+    <button @click="query=''">X</button>
+    <span v-if="resultats_cerca.length">
+      ({{resultats_cerca.length}} resultats)
+    </span>
+    <hr>
+  </div>
+
+  <div v-if="query!=''">
+    <ul>
+      <li v-for="peça in resultats_cerca">
+        <b style="color:blue">[{{peça.val}}x]</b> &mdash;
+        {{peça.key}}
+      </li>
+    </ul>
+  </div>
+
   <!--inventari-->
-  <details open>
+  <details open v-if="query==''">
     <summary class=h2>Inventari</summary>
     <div style="margin-left:0.83em">
       <details open v-for="cat,nom_cat in inventari">
@@ -118,10 +141,29 @@
 <script>
   let app = Vue.createApp({
     data(){return{
+      query:"",
+
       document,
       inventari,
       imatges,
     }},
-    methods:{},
+    methods:{
+      //
+    },
+    computed:{
+      resultats_cerca(){
+        let peces=[];//return value
+        let query = this.query.toUpperCase();
+        Object.values(inventari).forEach(obj=>{
+          Object.entries(obj).forEach(([key,val])=>{
+            let text = key.toUpperCase();
+            if(text.includes(query)){
+              peces.push({key,val});
+            }
+          });
+        });
+        return peces;
+      },
+    },
   }).mount("#app");
 </script>

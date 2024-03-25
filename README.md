@@ -1,6 +1,6 @@
 # inventari-electronica
 
-registre de cables, adaptadors, plaques... disponibles pels investigadors icra
+Registre de cables, adaptadors, plaques... disponibles pels investigadors icra
 
 La idea és que abans de comprar components nous mirem si ja tenim peces
 d'anteriors projectes.
